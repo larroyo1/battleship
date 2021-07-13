@@ -19,7 +19,10 @@ class Cell
   end
 
   def fire_upon
-    @ship.hit
+    if empty?
+      return 'empty fire'
+    else @ship.hit
+    end
   end
 
   def fired_upon?
@@ -27,16 +30,14 @@ class Cell
   end
 
   def render
-    if fired_upon? == false
-      return '.'
-    elsif fired_upon? && empty?
+    if fire_upon == 'empty fire'
       return 'M'
+    elsif fired_upon?
+      return 'H'
+    elsif @ship.health == 0
+      return 'X'
+    else
+      return '.'
     end
-
-
-
-
-    # return '.'
-    # return "M" if fired_upon? && empty?
   end
 end

@@ -38,11 +38,8 @@ RSpec.describe Cell do
 
     it 'Has a method render' do
       cell_1 = Cell.new("B4")
-      cruiser = Ship.new("Cruiser", 3)
-      # cell_1.place_ship(cruiser)
 
-
-      expect(cell_1.render).to eq('.')
+      # expect(cell_1.render).to eq('.')
 
       cell_1.fire_upon
 
