@@ -26,4 +26,17 @@ class Cell
     @ship.health < @ship.length
   end
 
+  def render
+    if fired_upon? == false
+      return '.'
+    elsif fired_upon? && empty?
+      return 'M'
+    end
+
+
+
+
+    # return '.'
+    # return "M" if fired_upon? && empty?
+  end
 end
