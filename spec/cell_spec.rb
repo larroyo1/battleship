@@ -56,8 +56,24 @@ RSpec.describe Cell do
       cell_2.fire_upon
 
       expect(cell_2.render).to eq('H')
-
     end
+
+    it 'works with optional argument' do
+      cell_2 = Cell.new("C3")
+      cruiser = Ship.new("Cruiser", 3)
+      cell_2.place_ship(cruiser)
+
+      expect(cell_2.render(true)).to eq("S")
+      cell_2.fire_upon
+      expect(cell_2.render).to eq("H")
+      expect(cruiser.sunk?).to be(false)
+      cruiser.hit
+      cruiser.hit
+      expect(cruiser.sunk?).to be(true)
+      expect(cell_2.render).to eq("X")
+    end
+
+
 
 
   end

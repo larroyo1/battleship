@@ -37,8 +37,10 @@ class Cell
     @fired_upon
   end
 
-  def render
-    if fired_upon? && empty?
+  def render(reveal = false)
+    if reveal == true && !empty?
+      @render = "S"
+    elsif fired_upon? && empty?
       @render = "M"
     elsif !empty? && fired_upon? && @ship.sunk?
       @render = "X"
