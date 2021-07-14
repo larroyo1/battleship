@@ -1,12 +1,18 @@
 require './lib/ship'
 
 class Cell
+  attr_accessor :fired_upon,
+                :render
+
+
   attr_reader :coordinate,
               :ship
 
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = nil
+    @fired_upon = false
+    @render = '.'
   end
 
   def place_ship(ship_name)
@@ -19,24 +25,26 @@ class Cell
   end
 
   def fire_upon
-    @ship.hit
+    if @ship != nil
+      @ship.hit
+      @fired_upon = true
+    else
+      @fired_upon = true
+    end
   end
 
   def fired_upon?
-    @ship.health < @ship.length
+    @fired_upon
   end
 
   def render
-    if fired_upon? == false
-      return '.'
-    elsif fired_upon? && empty?
-      return 'M'
+    if fired_upon? && empty?
+      @render = "M"
+    elsif !empty? && fired_upon? && @ship.sunk?
+      @render = "X"
+    elsif !empty? && fired_upon? && !@ship.sunk?
+      @render = "H"
+    else @render
     end
-
-
-
-
-    # return '.'
-    # return "M" if fired_upon? && empty?
   end
 end
