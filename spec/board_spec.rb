@@ -1,5 +1,6 @@
 require 'rspec'
 require './lib/board'
+require './lib/ship'
 
 RSpec.describe Board do
 
@@ -20,4 +21,16 @@ RSpec.describe Board do
     end
   end
 
+  context 'ship placements' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    it 'has valid ship placement' do
+      expect(board.valid_placement?(cruiser, ["A1", "A2"])).to be(false)
+      expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to be(false)
+      #double check this test
+      #expect(board.valid_placement?(submarine, ["A2", "A3"])).to be(true)
+    end
+  end
 end
