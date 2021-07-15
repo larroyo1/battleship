@@ -31,7 +31,21 @@ class Board
     end
   end
 
+  def consecutive_placements?
+    horizontal_placement? || vertical_placement?
+  end
+
+  def horizontal_placement?(coordinates_array)
+    coordinates_array.all? do |coordinate|
+      coordinate.end_with?(coordinate[1]
+    end
+
+  end
+
   def valid_placement?(ship, coordinates)
-    ship.length == coordinates.length && all_valid_placements?(coordinates)
+    ship.length == coordinates.length &&
+    all_valid_placements?(coordinates) &&
+    consecutive_placements?
+
   end
 end

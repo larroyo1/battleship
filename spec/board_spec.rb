@@ -37,7 +37,10 @@ RSpec.describe Board do
     it 'tests for all valid placements' do
       expect(board.all_valid_placements?(['A1', 'R1', '11'])).to eq(false)
       expect(board.all_valid_placements?(['A1', 'A2', 'A3', 'C3'])).to eq(true)
-      # expect(board.all_valid_placements([])).to eq(false)
+    end
+
+    it 'tests for consecutive cells' do
+
     end
   end
 end
