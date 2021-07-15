@@ -30,7 +30,7 @@ RSpec.describe Board do
       expect(board.valid_placement?(cruiser, ["A1", "A2"])).to be(false)
       expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to be(false)
       #double check this test
-      #expect(board.valid_placement?(submarine, ["A2", "A3"])).to be(true)
+      expect(board.valid_placement?(submarine, ["A2", "A3"])).to be(true)
     end
   end
 end
