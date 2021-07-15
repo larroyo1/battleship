@@ -25,8 +25,13 @@ class Board
     @cells.include? coordinate
   end
 
-  def valid_placement?(ship, coordinates)
-    ship.length == coordinates.length && valid_coordinate?
+  def all_valid_placements?(coordinates_array)
+    coordinates_array.all? do |coordinate_index|
+      valid_coordinate?(coordinate_index)
+    end
   end
 
+  def valid_placement?(ship, coordinates)
+    ship.length == coordinates.length && all_valid_placements?(coordinates)
+  end
 end
