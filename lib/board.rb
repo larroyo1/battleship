@@ -1,4 +1,5 @@
 require './cell'
+require 'pry'
 
 class Board
   attr_reader :cells
@@ -31,7 +32,52 @@ class Board
     end
   end
 
+  # def consecutive_placements?(coordinates_array)
+  #   horizontal_placement? || vertical_placement?
+  # end
+
+  def horizontal_placement?(coordinates_array)
+    coordinate_first_characters =
+    coordinates_array.map do |coordinate|
+      coordinate[0]
+    end
+
+    coordinate_first_characters.uniq.length !=
+    coordinate_first_characters.length
+  end
+
+  def vertical_placement?(coordinates_array)
+    coordinate_second_characters =
+    coordinates_array.map do |coordinate|
+      coordinate[1]
+    end
+
+    coordinate_second_characters.uniq.length !=
+    coordinate_second_characters.length
+  end
+
+  def consecutive_horizontal_placements(coordinates_array)
+    coordinate_second_characters =
+    coordinates_array.map do |coordinate|
+      coordinate[1]
+    end
+
+    if coordinate_second_characters.length == 2
+      coordinate_second_characters[1] - coordinate_second_characters[0] == 1
+    elsif coordinate_second_characters.length == 3
+      coordinate_second_characters[2]
+
+
+    # if coordinate_second_characters
+
+  end
+
   def valid_placement?(ship, coordinates)
-    ship.length == coordinates.length && all_valid_placements?(coordinates)
+    ship.length == coordinates.length &&
+    all_valid_placements?(coordinates) &&
+    horizontal_placement?(coordinates) ||
+    vertical_placement?(coordinates) &&
+    consecutive_placements?(coordinates)
+
   end
 end
