@@ -22,17 +22,10 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    if coordinate.class == Array
-      coordinate.each do |cell|
-        @cells.include? coordinate
-        end
-        true
-    elsif @cells.include? coordinate
-        true
-    else
-        false
-    end
+    @cells.include? coordinate
   end
+
+  
 
   def valid_placement?(ship, coordinates)
 
