@@ -10,8 +10,13 @@ RSpec.describe Board do
       expect(board).to be_a(Board)
     end
 
-    xit 'has cells' do
-      expect(board.cells).to eq(cellhash)
+    it 'has cells' do
+      expect(board.cells.count).to eq(16)
+    end
+
+    it 'has valid coordinates' do
+      expect(board.valid_coordinate?("A4")).to be(true)
+      expect(board.valid_coordinate?("E3")).to be(false)
     end
   end
 
