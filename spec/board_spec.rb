@@ -32,5 +32,12 @@ RSpec.describe Board do
       #double check this test
       expect(board.valid_placement?(submarine, ["A2", "A3"])).to be(true)
     end
+
+
+    it 'tests for all valid placements' do
+      expect(board.all_valid_placements?(['A1', 'R1', '11'])).to eq(false)
+      expect(board.all_valid_placements?(['A1', 'A2', 'A3', 'C3'])).to eq(true)
+      # expect(board.all_valid_placements([])).to eq(false)
+    end
   end
 end
