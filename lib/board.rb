@@ -32,9 +32,9 @@ class Board
     end
   end
 
-  # def consecutive_placements?(coordinates_array)
-  #   horizontal_placement? || vertical_placement?
-  # end
+  def consecutive_placements?(coordinates_array)
+     horizontal_placement? || vertical_placement?
+   end
 
   def horizontal_placement?(coordinates_array)
     coordinate_first_characters =
@@ -56,20 +56,16 @@ class Board
     coordinate_second_characters.length
   end
 
-  def consecutive_horizontal_placements(coordinates_array)
-    coordinate_second_characters =
-    coordinates_array.map do |coordinate|
-      coordinate[1]
-    end
+  def consecutive_vertical_placements?(coordinates_array)
+    index_0 = coordinates_array.map {|coordinate| coordinate[0]}
 
-    if coordinate_second_characters.length == 2
-      coordinate_second_characters[1] - coordinate_second_characters[0] == 1
-    elsif coordinate_second_characters.length == 3
-      coordinate_second_characters[2]
+    index_0 == (index_0.first..index_0.last).to_a
+  end
 
+  def consecutive_horizontal_placements?(coordinates_array)
+    index_1 = coordinates_array.map {|coordinate| coordinate[1]}
 
-    # if coordinate_second_characters
-
+    index_1 == (index_1.first..index_1.last).to_a
   end
 
   def valid_placement?(ship, coordinates)
@@ -77,7 +73,7 @@ class Board
     all_valid_placements?(coordinates) &&
     horizontal_placement?(coordinates) ||
     vertical_placement?(coordinates) &&
-    consecutive_placements?(coordinates)
-
+    consecutive_vertical_placements?(coordinates) &&
+    consecutive_horizontal_placements?(coordinates)
   end
 end
