@@ -26,6 +26,15 @@ class Board
     @cells.include? coordinate
   end
 
+  def place(ship, coordinates)
+    if valid_placement?(ship, coordinates)
+      coordinates.each do |coordinate|
+        @cells[coordinate].place_ship(ship)
+      end
+    end
+    # true
+  end
+
   def all_valid_placements?(coordinates_array)
     coordinates_array.all? do |coordinate_index|
       valid_coordinate?(coordinate_index)
@@ -76,4 +85,6 @@ class Board
     consecutive_vertical_placements?(coordinates) &&
     consecutive_horizontal_placements?(coordinates)
   end
+
+#  binding.pry
 end
