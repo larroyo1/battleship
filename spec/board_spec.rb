@@ -38,10 +38,20 @@ RSpec.describe Board do
       expect(board.all_valid_placements?(['A1', 'R1', '11'])).to eq(false)
       expect(board.all_valid_placements?(['A1', 'A2', 'A3', 'C3'])).to eq(true)
     end
-binding.pry
+
+    it 'validates vertical placement' do
+      expect(board.consecutive_vertical_placements?(["A1", "B1", "C1"])).to be(true)
+      expect(board.consecutive_vertical_placements?(["A1", "B1", "D1"])).to be(false)
+    end
+
+    it 'validates horizontal placement' do
+      expect(board.consecutive_horizontal_placements?(["A1", "A2", "A3"])).to be(true)
+      expect(board.consecutive_horizontal_placements?(["A1", "A2", "A4"])).to be(false)
+    end
+
     it 'finds bad placements' do
-      expect(board.valid_placement?(submarine, ["A2", "C3"])).to eq(false)
-      # expect(board.valid_placement?(submarine, ["A2", "A4"])).to eq(false)
+      expect(board.valid_placement?(submarine, ["A1", "A2"])).to be(true)
+      expect(board.valid_placement?(submarine, ["A1", "C1"])).to be(false)
     end
   end
 end
