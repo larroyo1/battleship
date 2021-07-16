@@ -77,6 +77,17 @@ class Board
     index_1 == (index_1.first..index_1.last).to_a
   end
 
+  def ship_present?(coordinates_array)
+    values = @cells.values
+
+      values.each do |value|
+        value.ship
+      end
+
+
+
+  end
+
   def valid_placement?(ship, coordinates)
     ship.length == coordinates.length &&
     all_valid_placements?(coordinates) &&
@@ -86,5 +97,5 @@ class Board
     consecutive_horizontal_placements?(coordinates)
   end
 
-#  binding.pry
+ binding.pry
 end
