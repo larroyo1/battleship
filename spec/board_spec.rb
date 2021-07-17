@@ -74,6 +74,11 @@ RSpec.describe Board do
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
 
+    it 'detects duplicate coordinates for same ship' do
+      expect(board.duplicate_coordinates?(["A1", "A1"])).to be(true)
+      expect(board.duplicate_coordinates?(["A1", "A2"])).to be(false)
+    end
+
     it 'detects overlapping ships' do
       expect(board.ship_present?(["A1", "A2"])).to be(false)
       board.place(cruiser, ["A1", "A2", "A3"])
