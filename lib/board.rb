@@ -82,9 +82,14 @@ class Board
     end
   end
 
+  def duplicate_coordinates?(coordinates_array)
+     coordinates_array != coordinates_array.uniq
+  end
+
   def valid_placement?(ship, coordinates)
     !ship_present?(coordinates) &&
     ship.length == coordinates.length &&
+    !duplicate_coordinates?(coordinates) &&
     all_valid_placements?(coordinates) &&
     horizontal_placement?(coordinates) ||
     vertical_placement?(coordinates) &&
