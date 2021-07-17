@@ -79,7 +79,7 @@ RSpec.describe Board do
       board.place(cruiser, ["A1", "A2", "A3"])
       expect(board.ship_present?(["A1", "A2"])).to be(true)
       expect(board.valid_placement?(submarine, ["A1", "A2"])).to be(false)
-
+      expect(board.valid_placement?(submarine, ["B1", "B2"])).to be(true)
     end
   end
 end
