@@ -83,14 +83,12 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
+    !ship_present?(coordinates) &&
     ship.length == coordinates.length &&
     all_valid_placements?(coordinates) &&
     horizontal_placement?(coordinates) ||
     vertical_placement?(coordinates) &&
     consecutive_vertical_placements?(coordinates) &&
-    consecutive_horizontal_placements?(coordinates) &&
-    !ship_present?(coordinates)
+    consecutive_horizontal_placements?(coordinates)
   end
-
- binding.pry
 end
