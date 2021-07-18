@@ -124,10 +124,18 @@ class Board
   def render(reveal = false)
     if reveal == true
       each_cell_status
-      "1 2 3 4 \nA #{@ship_cells[0]} #{@ship_cells[1]} #{@ship_cells[2]} #{@ship_cells[3]} \nB #{@ship_cells[4]} #{@ship_cells[5]} #{@ship_cells[6]} #{@ship_cells[7]} \nC #{@ship_cells[8]} #{@ship_cells[9]} #{@ship_cells[10]} #{@ship_cells[11]} \nD #{@ship_cells[12]} #{@ship_cells[13]} #{@ship_cells[14]} #{@ship_cells[15]} \n"
+      "  1 2 3 4 \n" +
+      "A #{@ship_cells[0]} #{@ship_cells[1]} #{@ship_cells[2]} #{@ship_cells[3]} \n" +
+      "B #{@ship_cells[4]} #{@ship_cells[5]} #{@ship_cells[6]} #{@ship_cells[7]} \n" +
+      "C #{@ship_cells[8]} #{@ship_cells[9]} #{@ship_cells[10]} #{@ship_cells[11]} \n" +
+      "D #{@ship_cells[12]} #{@ship_cells[13]} #{@ship_cells[14]} #{@ship_cells[15]} \n"
     else
       each_cell_render
-      "1 2 3 4 \nA #{@cell_renders[0]} #{@cell_renders[1]} #{@cell_renders[2]} #{@cell_renders[3]} \nB #{@cell_renders[4]} #{@cell_renders[5]} #{@cell_renders[6]} #{@cell_renders[7]} \nC #{@cell_renders[8]} #{@cell_renders[9]} #{@cell_renders[10]} #{@cell_renders[11]} \nD #{@cell_renders[12]} #{@cell_renders[13]} #{@cell_renders[14]} #{@cell_renders[15]} \n"
+      "  1 2 3 4 \n" +
+      "A #{@cell_renders[0]} #{@cell_renders[1]} #{@cell_renders[2]} #{@cell_renders[3]} \n" +
+      "B #{@cell_renders[4]} #{@cell_renders[5]} #{@cell_renders[6]} #{@cell_renders[7]} \n" +
+      "C #{@cell_renders[8]} #{@cell_renders[9]} #{@cell_renders[10]} #{@cell_renders[11]} \n" +
+      "D #{@cell_renders[12]} #{@cell_renders[13]} #{@cell_renders[14]} #{@cell_renders[15]} \n"
     end
   end
 end
