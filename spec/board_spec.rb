@@ -95,7 +95,7 @@ RSpec.describe Board do
 
     it 'renders initialized cells' do
       expect(board.render).to eq("1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
-      # expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render(true)).to eq("1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     end
 
     it 'renders hits when a ship has been fired upon' do
@@ -108,9 +108,13 @@ RSpec.describe Board do
       expect(board.render).to eq("1 2 3 4 \nA X X X . \nB . . . . \nC . . . . \nD . . . . \n")
     end
 
-    xit 'renders ships on the board when the argument true is given' do
-    expect(board.render(true)).to eq("1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+    it 'renders ships on the board when the argument true is given' do
+      expect(board.render(true)).to eq("1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
 
+      submarine = Ship.new("Submarine", 2)
+      board.place(submarine, ["B2", "B3"])
+
+      expect(board.render(true)).to eq("1 2 3 4 \nA S S S . \nB . S S . \nC . . . . \nD . . . . \n")
     end
   end
 end
