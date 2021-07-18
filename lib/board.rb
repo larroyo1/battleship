@@ -100,8 +100,10 @@ class Board
 
   def each_cell_render
   cell_instances = @cells.values
-    cell_instances.each do |cell_instance|
-      @cell_renders << cell_instance.render
+
+    @cell_renders =
+    cell_instances.map do |cell_instance|
+      cell_instance.render
     end
   end
 
