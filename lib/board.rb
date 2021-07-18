@@ -2,10 +2,11 @@ require './cell'
 require 'pry'
 
 class Board
-  attr_reader :cells
+  attr_reader :cells, :cell_renders
 
   def initialize
     @cells = create_cells
+    @cell_renders = []
   end
 
   def create_cells
@@ -96,4 +97,19 @@ class Board
     consecutive_vertical_placements?(coordinates) &&
     consecutive_horizontal_placements?(coordinates)
   end
+
+  def each_cell_render
+  cell_instances = @cells.values
+    cell_instances.each do |cell_instance|
+      @cell_renders << cell_instance.render
+    end
+  end
+
+
+  def render(reveal = false)
+      each_cell_render
+      puts "  1 2 3 4 \nA #{@cell_renders[0]} #{@cell_renders[1]} #{@cell_renders[2]} #{@cell_renders[3]} \nB #{@cell_renders[4]} #{@cell_renders[5]} #{@cell_renders[6]} #{@cell_renders[7]} \nC #{@cell_renders[8]} #{@cell_renders[9]} #{@cell_renders[10]} #{@cell_renders[11]} \nD #{@cell_renders[12]} #{@cell_renders[13]} #{@cell_renders[14]} #{@cell_renders[15]} \n"
+
+  end
+  binding.pry
 end
