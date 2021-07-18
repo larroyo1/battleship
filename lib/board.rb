@@ -2,11 +2,12 @@ require './cell'
 require 'pry'
 
 class Board
-  attr_reader :cells, :cell_renders
+  attr_reader :cells, :cell_renders, :ship_cells
 
   def initialize
     @cells = create_cells
     @cell_renders = []
+    @ship_cells = []
   end
 
   def create_cells
@@ -107,12 +108,23 @@ class Board
     end
   end
 
+  def each_cell_status
+  cell_instances = @cells.values
+
+    @ship_cells =
+    cell_instances.map do |cell_instance|
+      cell_instance.ship
+    end
+  end
+
   def render(reveal = false)
     each_cell_render
     if reveal == true
+
 
     else
       "1 2 3 4 \nA #{@cell_renders[0]} #{@cell_renders[1]} #{@cell_renders[2]} #{@cell_renders[3]} \nB #{@cell_renders[4]} #{@cell_renders[5]} #{@cell_renders[6]} #{@cell_renders[7]} \nC #{@cell_renders[8]} #{@cell_renders[9]} #{@cell_renders[10]} #{@cell_renders[11]} \nD #{@cell_renders[12]} #{@cell_renders[13]} #{@cell_renders[14]} #{@cell_renders[15]} \n"
     end
   end
+
 end
