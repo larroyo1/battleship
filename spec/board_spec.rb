@@ -94,27 +94,28 @@ RSpec.describe Board do
     board.place(cruiser, ["A1", "A2", "A3"])
 
     it 'renders initialized cells' do
-      expect(board.render).to eq("1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
-      expect(board.render(true)).to eq("1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     end
 
     it 'renders hits when a ship has been fired upon' do
-      expect(board.render).to eq("1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
       board.cells.fetch("A1").fire_upon
-      expect(board.render).to eq("1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n")
       board.cells.fetch("A2").fire_upon
-      expect(board.render).to eq("1 2 3 4 \nA H H . . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render).to eq("  1 2 3 4 \nA H H . . \nB . . . . \nC . . . . \nD . . . . \n")
       board.cells.fetch("A3").fire_upon
-      expect(board.render).to eq("1 2 3 4 \nA X X X . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render).to eq("  1 2 3 4 \nA X X X . \nB . . . . \nC . . . . \nD . . . . \n")
     end
 
     it 'renders ships on the board when the argument true is given' do
-      expect(board.render(true)).to eq("1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
 
       submarine = Ship.new("Submarine", 2)
       board.place(submarine, ["B2", "B3"])
 
-      expect(board.render(true)).to eq("1 2 3 4 \nA S S S . \nB . S S . \nC . . . . \nD . . . . \n")
+      expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . S S . \nC . . . . \nD . . . . \n")
+
     end
   end
 end
