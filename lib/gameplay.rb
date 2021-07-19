@@ -43,18 +43,16 @@ The Cruiser is three units long and the Submarine is two units long."
   end
 
   def place_cruiser
-    if @board.valid_placement?(@cruiser, @ship_array)
-      @board.place(@cruiser, @ship_array)
-    else
-      puts "Those are invalid Cruiser coordinates. Please try again:"
+    if @board.place(@cruiser, @ship_array)
+      else
+        puts "Those are invalid Cruiser coordinates. Please try again:"
     end
   end
 
   def place_submarine
-    if @board.valid_placement?(@cruiser, @ship_array)
-      @board.place(@submarine, @ship_array[3, 4])
-    else
-      puts "Those are invalid Submarine coordinates. Please try again:"
+    if @board.place(@submarine, @ship_array[3, 4])
+      else
+        puts "Those are invalid Submarine coordinates. Please try again:"
     end
   end
 
