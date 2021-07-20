@@ -3,13 +3,12 @@ require './lib/cell'
 require './lib/board'
 
 class Gameplay
-  attr_reader :ship_array, :board
+  attr_reader :board
 
   def initialize
     @board     = Board.new
     @cruiser   = Ship.new('Cruiser', 3)
     @submarine = Ship.new('Submarine', 2)
-    @ship_array = []
   end
 
   def welcome_message
@@ -28,29 +27,27 @@ Enter p to play. Enter q to quit."
 You now need to lay out your two ships.
 The Cruiser is three units long and the Submarine is two units long."
    puts @board.render
-   puts "Enter the first coordinate for the Cruiser (Letter/Number):"
-   @ship_array << gets.chomp
-   puts "Enter the second coordinate for the Cruiser:"
-   @ship_array << gets.chomp
-   puts "Enter the final coordinate for the Cruiser:"
-   @ship_array << gets.chomp
-   place_cruiser
-   puts "Enter the first coordinate for the Submarine (Letter/Number):"
-   @ship_array << gets.chomp
-   puts "Enter the final coordinate for the Submarine:"
-   @ship_array << gets.chomp
-   place_submarine
+   puts "Enter three coordinates for the Cruiser (Letter/Number):"
+   cruiser_coordinates = gets.chomp
+   cruiser_coordinates = cruiser_coordinates.split
+   place_cruiser(cruiser_coordinates)
+   puts "Enter two coordinates for the Submarine (Letter/Number):"
+   sub_coordinates = gets.chomp
+   sub_coordinates = sub_coordinates.split
+   place_submarine(sub_coordinates)
   end
 
-  def place_cruiser
-    if @board.place(@cruiser, @ship_array)
+  def place_cruiser(coordinates)
+    if @board.valid_placement?(@cruiser, coordinates)
+      @board.place(@cruiser, coordinates)
       else
         puts "Those are invalid Cruiser coordinates. Please try again:"
     end
   end
 
-  def place_submarine
-    if @board.place(@submarine, @ship_array[3, 4])
+  def place_submarine(coordinates)
+    if @board.valid_placement?(@submarine, coordinates)
+      @board.place(@submarine, coordinates)
       else
         puts "Those are invalid Submarine coordinates. Please try again:"
     end
