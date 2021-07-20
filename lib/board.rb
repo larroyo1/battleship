@@ -51,9 +51,7 @@ class Board
     coordinates_array.map do |coordinate|
       coordinate[0]
     end
-
-    coordinate_first_characters.uniq.length !=
-    coordinate_first_characters.length
+    coordinate_first_characters.uniq.length == 1
   end
 
   def vertical_placement?(coordinates_array)
@@ -61,9 +59,7 @@ class Board
     coordinates_array.map do |coordinate|
       coordinate[1]
     end
-
-    coordinate_second_characters.uniq.length !=
-    coordinate_second_characters.length
+    coordinate_second_characters.uniq.length == 1
   end
 
   def consecutive_vertical_placements?(coordinates_array)
