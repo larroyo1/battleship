@@ -1,6 +1,6 @@
-require './lib/ship'
-require './lib/cell'
-require './lib/board'
+require './ship'
+require './cell'
+require './board'
 
 class Gameplay
   attr_reader :board
@@ -30,10 +30,10 @@ The Cruiser is three units long and the Submarine is two units long."
    puts "Enter three coordinates for the Cruiser (Letter/Number):"
    cruiser_coordinates = gets.chomp
    cruiser_coordinates = cruiser_coordinates.split
-   place_cruiser(cruiser_coordinates)
    puts "Enter two coordinates for the Submarine (Letter/Number):"
    sub_coordinates = gets.chomp
    sub_coordinates = sub_coordinates.split
+   place_cruiser(cruiser_coordinates)
    place_submarine(sub_coordinates)
   end
 
@@ -56,7 +56,5 @@ The Cruiser is three units long and the Submarine is two units long."
   def end_game
     puts "goodbye"
   end
-
-require "pry"; binding.pry
-
+  require "pry"; binding.pry
 end
