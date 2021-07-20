@@ -58,7 +58,8 @@ RSpec.describe Board do
 
     it 'validates horizontal placement' do
       expect(board.consecutive_horizontal_placements?(["A1", "A2", "A3"])).to be(true)
-      expect(board.consecutive_horizontal_placements?(["A1", "A2", "A4"])).to be(false)
+      expect(board.consecutive_horizontal_placements?(["D1", "D3", "D4"])).to be(false)
+      expect(board.valid_placement?(cruiser, ["A1", "A2", "A4"])).to be(false)
     end
 
     it 'finds bad placements' do
