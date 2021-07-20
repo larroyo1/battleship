@@ -1,4 +1,5 @@
 require './cell'
+require './ship'
 require 'pry'
 
 class Board
@@ -76,7 +77,7 @@ class Board
 
   def ship_present?(coordinates_array)
     coordinates_array.any? do |coordinate|
-       @cells[coordinate].empty? == false
+       @cells[coordinate].ship
     end
   end
 
@@ -89,10 +90,10 @@ class Board
     ship.length == coordinates.length &&
     !duplicate_coordinates?(coordinates) &&
     all_valid_placements?(coordinates) &&
-    horizontal_placement?(coordinates) ||
-    vertical_placement?(coordinates) &&
-    consecutive_vertical_placements?(coordinates) &&
-    consecutive_horizontal_placements?(coordinates)
+    (horizontal_placement?(coordinates) ||
+    vertical_placement?(coordinates)) &&
+    (consecutive_horizontal_placements?(coordinates) ||
+    consecutive_vertical_placements?(coordinates))
   end
 
   def each_cell_render
