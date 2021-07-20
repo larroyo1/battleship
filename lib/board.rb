@@ -1,4 +1,5 @@
 require './cell'
+require './ship'
 require 'pry'
 
 class Board
@@ -51,9 +52,7 @@ class Board
     coordinates_array.map do |coordinate|
       coordinate[0]
     end
-
-    coordinate_first_characters.uniq.length !=
-    coordinate_first_characters.length
+    coordinate_first_characters.uniq.length == 1
   end
 
   def vertical_placement?(coordinates_array)
@@ -61,9 +60,7 @@ class Board
     coordinates_array.map do |coordinate|
       coordinate[1]
     end
-
-    coordinate_second_characters.uniq.length !=
-    coordinate_second_characters.length
+    coordinate_second_characters.uniq.length == 1
   end
 
   def consecutive_vertical_placements?(coordinates_array)
@@ -80,7 +77,7 @@ class Board
 
   def ship_present?(coordinates_array)
     coordinates_array.any? do |coordinate|
-       @cells[coordinate].empty? == false
+       @cells[coordinate].ship
     end
   end
 
@@ -93,10 +90,10 @@ class Board
     ship.length == coordinates.length &&
     !duplicate_coordinates?(coordinates) &&
     all_valid_placements?(coordinates) &&
-    horizontal_placement?(coordinates) ||
-    vertical_placement?(coordinates) &&
-    consecutive_vertical_placements?(coordinates) &&
-    consecutive_horizontal_placements?(coordinates)
+    (horizontal_placement?(coordinates) ||
+    vertical_placement?(coordinates)) &&
+    (consecutive_horizontal_placements?(coordinates) ||
+    consecutive_vertical_placements?(coordinates))
   end
 
   def each_cell_render

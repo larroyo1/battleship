@@ -29,6 +29,16 @@ RSpec.describe Board do
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
 
+    it 'tests horizontal placements' do
+      expect(board.horizontal_placement?(["A1", "A2", "A3"])).to be(true)
+      expect(board.horizontal_placement?(["A1", "A2", "B3"])).to be(false)
+    end
+
+    it 'vertical placements' do
+      expect(board.vertical_placement?(["A1", "B1", "C1"])).to be(true)
+      expect(board.vertical_placement?(["A1", "B1", "C2"])).to be(false)
+    end
+
     it 'has valid ship placement' do
       expect(board.valid_placement?(cruiser, ["A1", "A2"])).to be(false)
       expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to be(false)
@@ -48,12 +58,15 @@ RSpec.describe Board do
 
     it 'validates horizontal placement' do
       expect(board.consecutive_horizontal_placements?(["A1", "A2", "A3"])).to be(true)
-      expect(board.consecutive_horizontal_placements?(["A1", "A2", "A4"])).to be(false)
+      expect(board.consecutive_horizontal_placements?(["D1", "D3", "D4"])).to be(false)
+      expect(board.valid_placement?(cruiser, ["A1", "A2", "A4"])).to be(false)
     end
 
     it 'finds bad placements' do
       expect(board.valid_placement?(submarine, ["A1", "A2"])).to be(true)
       expect(board.valid_placement?(submarine, ["A1", "C1"])).to be(false)
+      expect(board.valid_placement?(cruiser, ["A1", "A2", "B4"])).to be(false)
+      expect(board.valid_placement?(cruiser, ["C1", "C2", "C3"])).to be(true)
     end
 
     it 'places ships' do
