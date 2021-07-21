@@ -14,18 +14,10 @@ class Turn
     take_turns
   end
 
-  # def thinking
-  #   puts "Thinking"
-  #   4.times do sleep(1)
-  #     print "."
-  #   end
-  # end
-
   def take_turns
     @game.display_boards
     loop do
       @game.user_fire
-      # thinking
       puts "thinking..."
       sleep(3)
       @game.cpu_fire

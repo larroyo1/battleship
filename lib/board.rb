@@ -45,10 +45,6 @@ class Board
     end
   end
 
-  # def consecutive_placements?(coordinates_array)
-  #    horizontal_placement? || vertical_placement?
-  #  end
-
   def horizontal_placement?(coordinates_array)
     coordinate_first_characters =
     coordinates_array.map do |coordinate|
@@ -119,11 +115,6 @@ class Board
     @ship_cells =
     cell_instances.map do |cell_instance|
       cell_instance.render(true)
-      # if cell_instance.ship == nil
-      #   "."
-      # else
-      #   cell_instance.render(true)
-      # end
     end
   end
 

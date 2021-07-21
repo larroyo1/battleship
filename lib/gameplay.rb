@@ -101,7 +101,6 @@ The Cruiser is three units long and the Submarine is two units long."
     puts @board.render(true)
   end
 
-
   def user_fire
     puts "Enter the coordinate for your shot:"
     chosen_coordinate = gets.chomp
