@@ -109,6 +109,8 @@ The Cruiser is three units long and the Submarine is two units long."
       puts "Invalid coordinate. Please enter a valid coordinate"
       user_fire
     end
+    display_boards
+    user_feedback(chosen_coordinate)
   end
 
   def cpu_fire
@@ -118,6 +120,34 @@ The Cruiser is three units long and the Submarine is two units long."
       else
         cpu_fire
       end
+      display_boards
+      cpu_feedback(coordinate)
+  end
+
+  def cpu_feedback(coordinate)
+    coordinate_render = board.cells[coordinate].render
+    cell = board.cells[coordinate].coordinate
+    if coordinate_render == "M"
+      coordinate_render = "was a miss"
+    elsif coordinate_render == "H"
+      coordinate_render = "was a hit"
+    elsif coordinate_render == "X"
+      coordinate_render = "sunk your ship"
+    end
+    puts "My shot on #{cell} #{coordinate_render}!"
+  end
+
+  def user_feedback(coordinate)
+    coordinate_render = cpu_board.cells[coordinate].render
+    cell = cpu_board.cells[coordinate].coordinate
+    if coordinate_render == "M"
+      coordinate_render = "was a miss"
+    elsif coordinate_render == "H"
+      coordinate_render = "was a hit"
+    elsif coordinate_render == "X"
+      coordinate_render = "sunk your ship"
+    end
+    puts "Your shot on #{cell} #{coordinate_render}!"
   end
 
   def end_game
