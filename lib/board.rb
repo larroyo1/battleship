@@ -112,7 +112,7 @@ class Board
 
     @ship_cells =
     cell_instances.map do |cell_instance|
-      cell_instance.render
+      cell_instance.render(true)
       if cell_instance.ship == nil
         "."
       else

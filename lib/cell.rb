@@ -44,7 +44,7 @@ class Cell
       "H"
     elsif reveal == true && empty? && fired_upon?
       "M"
-    elsif reveal == true && !empty && fired_upon? && @ship.sunk?
+    elsif reveal == true && !empty? && fired_upon? && @ship.sunk?
       "X"
     elsif fired_upon? && empty?
       "M"
