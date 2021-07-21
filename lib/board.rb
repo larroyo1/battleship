@@ -1,9 +1,11 @@
 require './cell'
 require './ship'
-require 'pry'
+
 
 class Board
-  attr_reader :cells, :cell_renders, :ship_cells
+  attr_reader :cells,
+              :cell_renders,
+              :ship_cells
 
   def initialize
     @cells        = create_cells
@@ -13,8 +15,8 @@ class Board
 
   def create_cells
     cells_hash = {}
-    numbers = [1, 2, 3, 4]
-    letters = ["A", "B", "C", "D"]
+    numbers    = [1, 2, 3, 4]
+    letters    = ["A", "B", "C", "D"]
 
     letters.each do |letter|
       numbers.each do |number|
@@ -43,10 +45,6 @@ class Board
     end
   end
 
-  def consecutive_placements?(coordinates_array)
-     horizontal_placement? || vertical_placement?
-   end
-
   def horizontal_placement?(coordinates_array)
     coordinate_first_characters =
     coordinates_array.map do |coordinate|
@@ -64,14 +62,18 @@ class Board
   end
 
   def consecutive_vertical_placements?(coordinates_array)
-    index_0 = coordinates_array.map {|coordinate| coordinate[0]}
-
+    index_0 =
+    coordinates_array.map do |coordinate|
+      coordinate[0]
+    end
     index_0 == (index_0.first..index_0.last).to_a
   end
 
   def consecutive_horizontal_placements?(coordinates_array)
-    index_1 = coordinates_array.map {|coordinate| coordinate[1]}
-
+    index_1 =
+    coordinates_array.map do |coordinate|
+      coordinate[1]
+    end
     index_1 == (index_1.first..index_1.last).to_a
   end
 
@@ -112,12 +114,7 @@ class Board
 
     @ship_cells =
     cell_instances.map do |cell_instance|
-      cell_instance.render
-      # if cell_instance.ship == nil
-      #   "."
-      # else
-      #   cell_instance.render
-      # end
+      cell_instance.render(true)
     end
   end
 

@@ -4,6 +4,14 @@ require './board'
 
 class Gameplay
 
+  attr_reader :cpu_board,
+              :board,
+              :cruiser,
+              :submarine,
+              :cpu_cruiser,
+              :cpu_submarine
+
+
   def initialize
     @board         = Board.new
     @cpu_board     = Board.new
@@ -17,7 +25,7 @@ class Gameplay
     puts "Welcome to BATTLESHIP
 Enter p to play. Enter q to quit."
 
-    if gets.chomp == 'p'
+    if gets.downcase.chomp == 'p'
       start_game
     else
       end_game
@@ -37,6 +45,7 @@ The Cruiser is three units long and the Submarine is two units long."
    sub_coordinates = gets.chomp
    sub_coordinates = sub_coordinates.split
    place_submarine(sub_coordinates)
+   cpu_place_ships
   end
 
   def place_cruiser(coordinates)
@@ -92,12 +101,16 @@ The Cruiser is three units long and the Submarine is two units long."
     puts @board.render(true)
   end
 
-
   def user_fire
     puts "Enter the coordinate for your shot:"
     chosen_coordinate = gets.chomp
-    if @cpu_board.valid_coordinate?(chosen_coordinate)
+    if @cpu_board.valid_coordinate?(chosen_coordinate) && @cpu_board.cells[chosen_coordinate].fired_upon == true
+    puts "You've already fired on this cell. Please enter a valid coordinate"
+    user_fire
+    elsif @cpu_board.valid_coordinate?(chosen_coordinate)
       @cpu_board.cells[chosen_coordinate].fire_upon
+      display_boards
+      user_feedback(chosen_coordinate)
     else
       puts "Invalid coordinate. Please enter a valid coordinate"
       user_fire
@@ -111,10 +124,37 @@ The Cruiser is three units long and the Submarine is two units long."
       else
         cpu_fire
       end
+      display_boards
+      cpu_feedback(coordinate)
+  end
+
+  def cpu_feedback(coordinate)
+    coordinate_render = board.cells[coordinate].render
+    cell = board.cells[coordinate].coordinate
+    if coordinate_render == "M"
+      coordinate_render = "was a miss"
+    elsif coordinate_render == "H"
+      coordinate_render = "was a hit"
+    elsif coordinate_render == "X"
+      coordinate_render = "sunk your ship"
+    end
+    puts "My shot on #{cell} #{coordinate_render}!"
+  end
+
+  def user_feedback(coordinate)
+    coordinate_render = cpu_board.cells[coordinate].render
+    cell = cpu_board.cells[coordinate].coordinate
+    if coordinate_render == "M"
+      coordinate_render = "was a miss"
+    elsif coordinate_render == "H"
+      coordinate_render = "was a hit"
+    elsif coordinate_render == "X"
+      coordinate_render = "sunk my ship"
+    end
+    puts "Your shot on #{cell} #{coordinate_render}!"
   end
 
   def end_game
     puts "goodbye"
   end
-  require "pry"; binding.pry
 end
