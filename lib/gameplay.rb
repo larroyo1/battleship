@@ -25,7 +25,7 @@ class Gameplay
     puts "Welcome to BATTLESHIP
 Enter p to play. Enter q to quit."
 
-    if gets.chomp == 'p'
+    if gets.downcase.chomp == 'p'
       start_game
     else
       end_game
@@ -110,12 +110,12 @@ The Cruiser is three units long and the Submarine is two units long."
     user_fire
     elsif @cpu_board.valid_coordinate?(chosen_coordinate)
       @cpu_board.cells[chosen_coordinate].fire_upon
+      display_boards
+      user_feedback(chosen_coordinate)
     else
       puts "Invalid coordinate. Please enter a valid coordinate"
       user_fire
     end
-    display_boards
-    user_feedback(chosen_coordinate)
   end
 
   def cpu_fire

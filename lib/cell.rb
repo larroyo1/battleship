@@ -3,8 +3,6 @@ require './ship'
 class Cell
   attr_accessor :fired_upon
 
-
-
   attr_reader :coordinate,
               :ship
 
@@ -12,7 +10,6 @@ class Cell
     @coordinate = coordinate
     @ship       = nil
     @fired_upon = false
-    # @render     = '.'
   end
 
   def place_ship(ship_name)

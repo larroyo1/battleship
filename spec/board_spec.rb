@@ -122,12 +122,12 @@ RSpec.describe Board do
     end
 
     it 'renders ships on the board when the argument true is given' do
-      expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render(true)).to eq("  1 2 3 4 \nA X X X . \nB . . . . \nC . . . . \nD . . . . \n")
 
       submarine = Ship.new("Submarine", 2)
       board.place(submarine, ["B2", "B3"])
 
-      expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . S S . \nC . . . . \nD . . . . \n")
+      expect(board.render(true)).to eq("  1 2 3 4 \nA X X X . \nB . S S . \nC . . . . \nD . . . . \n")
 
     end
   end
