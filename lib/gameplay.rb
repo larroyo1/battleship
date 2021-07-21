@@ -4,6 +4,10 @@ require './board'
 
 class Gameplay
 
+  attr_reader :cpu_board,
+              :board
+
+
   def initialize
     @board         = Board.new
     @cpu_board     = Board.new
@@ -96,7 +100,10 @@ The Cruiser is three units long and the Submarine is two units long."
   def user_fire
     puts "Enter the coordinate for your shot:"
     chosen_coordinate = gets.chomp
-    if @cpu_board.valid_coordinate?(chosen_coordinate)
+    if @cpu_board.valid_coordinate?(chosen_coordinate) && @cpu_board.cells[chosen_coordinate].fired_upon == true
+    puts "You've already fired on this cell. Please enter a valid coordinate"
+    user_fire
+    elsif @cpu_board.valid_coordinate?(chosen_coordinate)
       @cpu_board.cells[chosen_coordinate].fire_upon
     else
       puts "Invalid coordinate. Please enter a valid coordinate"
