@@ -113,11 +113,11 @@ class Board
     @ship_cells =
     cell_instances.map do |cell_instance|
       cell_instance.render
-      # if cell_instance.ship == nil
-      #   "."
-      # else
-      #   cell_instance.render
-      # end
+      if cell_instance.ship == nil
+        "."
+      else
+        cell_instance.render(true)
+      end
     end
   end
 

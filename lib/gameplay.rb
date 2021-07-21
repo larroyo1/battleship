@@ -5,7 +5,11 @@ require './board'
 class Gameplay
 
   attr_reader :cpu_board,
-              :board
+              :board,
+              :cruiser,
+              :submarine,
+              :cpu_cruiser,
+              :cpu_submarine
 
 
   def initialize
@@ -41,6 +45,7 @@ The Cruiser is three units long and the Submarine is two units long."
    sub_coordinates = gets.chomp
    sub_coordinates = sub_coordinates.split
    place_submarine(sub_coordinates)
+   cpu_place_ships
   end
 
   def place_cruiser(coordinates)
@@ -153,5 +158,4 @@ The Cruiser is three units long and the Submarine is two units long."
   def end_game
     puts "goodbye"
   end
-  require "pry"; binding.pry
 end

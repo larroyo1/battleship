@@ -38,8 +38,14 @@ class Cell
   end
 
   def render(reveal = false)
-    if reveal == true && !empty?
+    if reveal == true && !empty? && !fired_upon
       "S"
+    elsif reveal == true && !empty? && fired_upon? && !@ship.sunk?
+      "H"
+    elsif reveal == true && empty? && fired_upon?
+      "M"
+    elsif reveal == true && !empty && fired_upon? && @ship.sunk?
+      "X"
     elsif fired_upon? && empty?
       "M"
     elsif !empty? && fired_upon? && @ship.sunk?
