@@ -1,6 +1,6 @@
 require './cell'
 require './ship'
-require 'pry'
+
 
 class Board
   attr_reader :cells,
