@@ -3,12 +3,16 @@ require './cell'
 require './board'
 
 class Gameplay
-  attr_reader :board
+  attr_reader :board,
+              :cpu_board
 
   def initialize
-    @board     = Board.new
-    @cruiser   = Ship.new('Cruiser', 3)
-    @submarine = Ship.new('Submarine', 2)
+    @board         = Board.new
+    @cpu_board     = Board.new
+    @cruiser       = Ship.new('Cruiser', 3)
+    @submarine     = Ship.new('Submarine', 2)
+    @cpu_cruiser   = Ship.new('Computer Cruiser', 3)
+    @cpu_submarine = Ship.new('Computer Submarine', 2)
   end
 
   def welcome_message
@@ -30,10 +34,10 @@ The Cruiser is three units long and the Submarine is two units long."
    puts "Enter three coordinates for the Cruiser (Letter/Number):"
    cruiser_coordinates = gets.chomp
    cruiser_coordinates = cruiser_coordinates.split
+   place_cruiser(cruiser_coordinates)
    puts "Enter two coordinates for the Submarine (Letter/Number):"
    sub_coordinates = gets.chomp
    sub_coordinates = sub_coordinates.split
-   place_cruiser(cruiser_coordinates)
    place_submarine(sub_coordinates)
   end
 
@@ -42,6 +46,9 @@ The Cruiser is three units long and the Submarine is two units long."
       @board.place(@cruiser, coordinates)
       else
         puts "Those are invalid Cruiser coordinates. Please try again:"
+        cruiser_coordinates = gets.chomp
+        cruiser_coordinates = cruiser_coordinates.split
+        place_cruiser(cruiser_coordinates)
     end
   end
 
@@ -50,7 +57,71 @@ The Cruiser is three units long and the Submarine is two units long."
       @board.place(@submarine, coordinates)
       else
         puts "Those are invalid Submarine coordinates. Please try again:"
+        sub_coordinates = gets.chomp
+        sub_coordinates = sub_coordinates.split
+        place_submarine(sub_coordinates)
     end
+  end
+
+  def cpu_place_ships
+    cpu_place_cruiser
+    cpu_place_submarine
+  end
+
+  def cpu_place_cruiser
+    coordinates_sample = []
+    loop do
+      coordinates_sample = @cpu_board.cells.keys.sample(3)
+      break if @cpu_board.valid_placement?(@cpu_cruiser, coordinates_sample)
+    end
+    @cpu_board.place(@cpu_cruiser, coordinates_sample)
+  end
+
+  def cpu_place_submarine
+    coordinates_sample = []
+    loop do
+      coordinates_sample = @cpu_board.cells.keys.sample(2)
+      break if @cpu_board.valid_placement?(@cpu_submarine, coordinates_sample)
+    end
+    @cpu_board.place(@cpu_submarine, coordinates_sample)
+  end
+
+  def display_boards
+    lines = '=' * 13
+    puts "#{lines}COMPUTER BOARD#{lines}"
+    puts @cpu_board.render
+    puts "#{lines}PLAYER BOARD#{lines}"
+    puts @board.render(true)
+  end
+
+  def user_render_putter
+    puts @board.render(true)
+  end
+
+  def cpu_render_putter
+    puts @cpu_board.render
+  end
+
+
+  def user_fire
+    puts "Enter the coordinate for your shot:"
+    chosen_coordinate = gets.chomp
+    if @cpu_board.valid_coordinate?(chosen_coordinate)
+      @cpu_board.cells[chosen_coordinate].fire_upon
+    else
+      puts "Invalid coordinate. Please enter a valid coordinate"
+      user_fire
+    end
+  end
+
+  def cpu_fire
+    coordinate = @board.cells.keys.sample
+      if coordinate.fired_upon? == false
+        @board.cells.fetch(coordinate).fire_upon
+        @board.cells.fetch(coordinate).render
+      else
+        cpu_fire
+      end
   end
 
   def end_game
