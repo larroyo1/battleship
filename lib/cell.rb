@@ -1,8 +1,8 @@
 require './ship'
 
 class Cell
-  attr_accessor :fired_upon,
-                :render
+  attr_accessor :fired_upon
+
 
 
   attr_reader :coordinate,
@@ -12,7 +12,7 @@ class Cell
     @coordinate = coordinate
     @ship       = nil
     @fired_upon = false
-    @render     = '.'
+    # @render     = '.'
   end
 
   def place_ship(ship_name)
@@ -39,14 +39,15 @@ class Cell
 
   def render(reveal = false)
     if reveal == true && !empty?
-      @render = "S"
+      "S"
     elsif fired_upon? && empty?
-      @render = "M"
+      "M"
     elsif !empty? && fired_upon? && @ship.sunk?
-      @render = "X"
+      "X"
     elsif !empty? && fired_upon? && !@ship.sunk?
-      @render = "H"
-    else @render
+      "H"
+    else
+      '.'
     end
   end
 end
