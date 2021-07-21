@@ -24,6 +24,12 @@ class Turn
       break if (@game.cpu_cruiser.sunk? == true && @game.cpu_submarine.sunk? == true) ||
       (@game.cruiser.sunk? == true && @game.submarine.sunk? == true)
     end
+
+    if (@game.cpu_cruiser.sunk? == true && @game.cpu_submarine.sunk? == true)
+      puts "You Won!"
+    elsif (@game.cruiser.sunk? == true && @game.submarine.sunk? == true)
+      puts "I won!"
+    end    
   end
 
 

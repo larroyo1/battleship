@@ -150,7 +150,7 @@ The Cruiser is three units long and the Submarine is two units long."
     elsif coordinate_render == "H"
       coordinate_render = "was a hit"
     elsif coordinate_render == "X"
-      coordinate_render = "sunk your ship"
+      coordinate_render = "sunk my ship"
     end
     puts "Your shot on #{cell} #{coordinate_render}!"
   end
