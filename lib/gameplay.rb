@@ -3,8 +3,6 @@ require './cell'
 require './board'
 
 class Gameplay
-  attr_reader :board,
-              :cpu_board
 
   def initialize
     @board         = Board.new
@@ -94,14 +92,6 @@ The Cruiser is three units long and the Submarine is two units long."
     puts @board.render(true)
   end
 
-  def user_render_putter
-    puts @board.render(true)
-  end
-
-  def cpu_render_putter
-    puts @cpu_board.render
-  end
-
 
   def user_fire
     puts "Enter the coordinate for your shot:"
@@ -116,9 +106,8 @@ The Cruiser is three units long and the Submarine is two units long."
 
   def cpu_fire
     coordinate = @board.cells.keys.sample
-      if coordinate.fired_upon? == false
+      if @board.cells[coordinate].fired_upon? == false
         @board.cells.fetch(coordinate).fire_upon
-        @board.cells.fetch(coordinate).render
       else
         cpu_fire
       end
