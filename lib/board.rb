@@ -6,9 +6,9 @@ class Board
   attr_reader :cells, :cell_renders, :ship_cells
 
   def initialize
-    @cells = create_cells
+    @cells        = create_cells
     @cell_renders = []
-    @ship_cells = []
+    @ship_cells   = []
   end
 
   def create_cells
@@ -39,7 +39,7 @@ class Board
 
   def all_valid_placements?(coordinates_array)
     coordinates_array.all? do |coordinate_index|
-      valid_coordinate?(coordinate_index)
+      @cells.include? coordinate_index
     end
   end
 
@@ -76,8 +76,10 @@ class Board
   end
 
   def ship_present?(coordinates_array)
-    coordinates_array.any? do |coordinate|
-       @cells[coordinate].ship
+    if all_valid_placements?(coordinates_array)
+      coordinates_array.any? do |coordinate|
+        @cells[coordinate].ship
+      end
     end
   end
 

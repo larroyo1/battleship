@@ -94,11 +94,35 @@ The Cruiser is three units long and the Submarine is two units long."
     puts @board.render(true)
   end
 
+  def user_render_putter
+    puts @board.render(true)
+  end
+
+  def cpu_render_putter
+    puts @cpu_board.render
+  end
 
 
+  def user_fire
+    puts "Enter the coordinate for your shot:"
+    chosen_coordinate = gets.chomp
+    if @cpu_board.valid_coordinate?(chosen_coordinate)
+      @cpu_board.cells[chosen_coordinate].fire_upon
+    else
+      puts "Invalid coordinate. Please enter a valid coordinate"
+      user_fire
+    end
+  end
 
-
-
+  def cpu_fire
+    coordinate = @board.cells.keys.sample
+      if coordinate.fired_upon? == false
+        @board.cells.fetch(coordinate).fire_upon
+        @board.cells.fetch(coordinate).render
+      else
+        cpu_fire
+      end
+  end
 
   def end_game
     puts "goodbye"

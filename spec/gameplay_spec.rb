@@ -16,6 +16,5 @@ RSpec.describe Gameplay do
     it 'welcomes a user' do
       expect(game.welcome_message).to eq("Welcome to BATTLESHIP\n  Enter p to play. Enter q to quit.")
     end
-
   end
 end

@@ -10,9 +10,9 @@ class Cell
 
   def initialize(coordinate)
     @coordinate = coordinate
-    @ship = nil
+    @ship       = nil
     @fired_upon = false
-    @render = '.'
+    @render     = '.'
   end
 
   def place_ship(ship_name)
